@@ -25,6 +25,3 @@ Run the Game
 
   $python3 Game.py
   
-Future version :
-
-    Upgrade the same TicTacToe on 4x4 (16) or (NxN) (Square), where N is a +ve integer(>=3) and Square = N x N 
