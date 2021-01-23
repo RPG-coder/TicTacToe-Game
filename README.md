@@ -2,8 +2,8 @@
 TicTacToe Game based on Minimax Algorithm using OpenCV/Python
 TicTacToe Game (3x3) (9 Blocks)
 
-    System Requirement : Ubuntu OS (main Requirement OpenCV and Python on any OS)
-    Software Requirement : Python
+    System Requirement : Ubuntu OS, Windows (main Requirement OpenCV and Python on any OS)
+    Software Requirement : Python, OpenCV, NumPy
 
 The Game is built by using 
 
