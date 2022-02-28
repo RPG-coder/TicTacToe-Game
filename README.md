@@ -16,9 +16,7 @@
 ## TicTacToe-Game
 This repository contains the TicTacToe game files. **TicTacToe Game (3x3) (9 Blocks)**
 
-This simple game comes with a elegant user interface and options using mouse & keyboard stokes. User can choose to play Player1 vs Player2 (Multiplayer) or Player vs Computer (Artificial Intelligence).
-
-
+This simple game comes with an elegant user interface and game options using mouse & keyboard stokes. Users can choose to play Player1 vs Player2 (Multiplayer) or Player vs Computer (Artificial Intelligence).
   
 ## Structure of the application
 
