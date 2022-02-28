@@ -21,8 +21,9 @@ This simple game comes with a elegant user interface and options using mouse & k
 
   
 ## Structure of the application
+
 - Game.py with core functionality in Python and Frontend GUI is implemented OpenCV-Python
-  - 
+
 
 
 ## Features : 💯
