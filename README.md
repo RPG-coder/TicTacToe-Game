@@ -32,7 +32,7 @@ This simple game comes with a elegant user interface and options using mouse & k
 - Windows executable included in a **dist** folder  
 
 ## Demo: Wanna try and see how this game works??
-- Windows executable file available in [dist/Game.exe](https://github.com/RPG-coder/8-puzzle-and-15-puzzle-Game/tree/master/dist)
+- Windows executable file available in [dist/Game.exe](https://github.com/RPG-coder/TicTacToe-Game/tree/master/dist)
 
 ## Interested in working of the game? - Installation Procedure
 ### Installation Dependency: Installing Miniconda
