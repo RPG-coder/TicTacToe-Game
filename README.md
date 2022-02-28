@@ -25,9 +25,11 @@ This simple game comes with an elegant user interface and game options using mou
 
 
 ## Features : 💯
-- Generates only solveble puzzles
-- Comes with a Hint suggestion
-- Windows executable included in a **dist** folder  
+- Elegant UI 
+- Play against your pals with Player vs Player
+- Switch to play against computer; at Anytime during the gameplay
+- Unbeatable Artificial Intelligence player that will keep on suprising you
+- Wanna give a try?? Windows executable included in a **dist** folder  
 
 ## Demo: Wanna try and see how this game works??
 - Windows executable file available in [dist/Game.exe](https://github.com/RPG-coder/TicTacToe-Game/tree/master/dist)
