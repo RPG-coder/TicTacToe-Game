@@ -58,7 +58,7 @@ This simple game comes with an elegant user interface and game options using mou
 
   $python Game.py
 
-## Like the repo?? 🥰 💓 💑 💜
+## Like the repo?? 🥰 💓 💜
 In case you have taken a like for this repository, please do star or fork my repo. Your support will not only help me in improving recognition for this repository but also encourage me in developing and sharing more interesting projects and contents.
 
 Likewise, Thank you for showing your appreciation to this repo. 
