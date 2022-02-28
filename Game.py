@@ -1,7 +1,29 @@
+"""
+    TicTacToe Game is a board game of placing crosses and circles and is played as a multiplayer or as a computer vs player.
+    Copyright (C) 2018  Rahul Gautham Putcha
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    For more details on contact, please visit https://rahulgputcha.com or email to rahulgautham95@gmail.com
+
+"""
 #Header Files
 import cv2
 import numpy as np
 from random import randint
+import time
+
 #-----------------------------------------------------------------------------------
 
 #Classes
@@ -33,7 +55,7 @@ class GUI() :
 		for i in range(3) :
 			row  = []
 			for j in range(3) :
-				row.append([Block(i,j),(j*(self.width/3)+3,i*(self.height/3)+3),((j+1)*(self.width/3)-3,(i+1)*(self.height/3)-3)])
+				row.append([Block(i,j),(j*(self.width//3)+3,i*(self.height//3)+3),((j+1)*(self.width//3)-3,(i+1)*(self.height//3)-3)])
 			self.blocks.append(row)
 	#-----------------------------------------------------------------------------------
 	#Drawing GUI and Game Screen
@@ -45,7 +67,7 @@ class GUI() :
 				end_point = self.blocks[i][j][2]
 				cv2.rectangle(self.image,start_point,end_point,(255,255,255),-1)
 				value = " " if self.blocks[i][j][0].value is None else self.blocks[i][j][0].value
-				cv2.putText(self.image,value,(j*(self.width/3)+25,(i*self.height/3)+100),cv2.FONT_HERSHEY_SIMPLEX,5,(0,0,0),5)
+				cv2.putText(self.image,value,(j*(self.width//3)+25,(i*self.height//3)+100),cv2.FONT_HERSHEY_SIMPLEX,5,(0,0,0),5)
 		if self.checkWin() :
 			string = ("Player "+str(self.turn)+" Wins" if self.turn!=self.vsCom else "Computer Wins") if self.turn==1 else ("Player "+str(2)+" Win" if self.turn!=self.vsCom else "Computer Win")
 		else :
@@ -53,11 +75,11 @@ class GUI() :
 				string = ("Player "+str(self.turn)+"'s Turn" if self.turn!=self.vsCom else "Computer's Turn") if self.turn==1 else ("Player "+str(2)+"'s Turn" if self.turn!=self.vsCom else "Computer's Turn")
 			else :
 				string = "Match Draw!!"
-		cv2.putText(self.image,string,(self.width/2-70,self.height+30),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
+		cv2.putText(self.image,string,(self.width//2-70,self.height+30),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
 		cv2.putText(self.image,"R - Reset",(10,self.height+60),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
 		cv2.putText(self.image,"Esc - Exit",(10,self.height+80),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
 		string = "vs Computer" if self.vsCom==0 else "vs Human"
-		cv2.putText(self.image,"Space - "+string,(self.width/2+10,self.height+80),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
+		cv2.putText(self.image,"Space - "+string,(self.width//2+10,self.height+80),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
 
 		if self.selected and not(self.checkWin() or self.checkDraw()):
 			self.change   = True
@@ -68,28 +90,35 @@ class GUI() :
 	def mainLoop(self) :	#Game Loop till Esc(Close) button is pressed
 		cv2.namedWindow(self.windowName)
 		cv2.setMouseCallback(self.windowName,self.mouseCall)
-		while True and cv2.getWindowProperty(self.windowName,1) != -1 :
-			if self.change :
-				self.change=False
-				self.draw()
-				if self.vsCom == self.turn and not(self.checkWin() or self.checkDraw()):
-					block = self.nextMove()
-					block.setValue("x" if self.turn==1 else "o")
-					self.selected = True
+		try:
+			while True and cv2.getWindowProperty(self.windowName,1) != -1 :
+				if self.change :
+					self.change=False
+					self.draw()
+
+					if self.vsCom == self.turn and not(self.checkWin() or self.checkDraw()):
+						block = self.nextMove()
+						block.setValue("x" if self.turn==1 else "o")
+						
+						self.selected = True
+						self.change = True
+						
+
+					cv2.imshow(self.windowName,self.image)
+				#Keyboard Hits
+				key = cv2.waitKey(1)
+				if key == 27 : break
+				elif key == ord("r") or key == ord("R") : 
+					self.reset()
+				if key == ord(" ") and not(self.checkWin() or self.checkDraw()):
+					if self.vsCom :
+						self.vsCom = 0
+					else :
+						self.vsCom = self.turn 
 					self.change = True
-				cv2.imshow(self.windowName,self.image)
-			#Keyboard Hits
-			key = cv2.waitKey(1)
-			if key == 27 : break
-			elif key == ord("r") or key == ord("R") : 
-				self.reset()
-			if key == ord(" ") and not(self.checkWin() or self.checkDraw()):
-				if self.vsCom :
-					self.vsCom = 0
-				else :
-					self.vsCom = self.turn 
-				self.change = True
-		cv2.destroyAllWindows()
+			cv2.destroyAllWindows()
+		except:
+			print("Window is successfully closed")
 
 	def checkWin(self) :
 		self.win = False
@@ -132,10 +161,10 @@ class GUI() :
 			blocks = []
 			for block in scoresList :
 				if scoresList[block] == bestScore :
-					#print(block.pos,bestScore)
+					##print(block.pos,bestScore)
 					blocks.append(block)
 		choice = blocks[randint(0,len(blocks)-1)]
-		print(choice.pos)
+		#print(choice.pos)
 		return choice
 
 	def min_max(self,depth,player) :		#MinMax Algorithms Function
@@ -151,7 +180,9 @@ class GUI() :
 						block[0].value = ("x" if self.turn == 1 else "o")
 						scoresList.append(self.min_max(depth+1,player*-1))
 						block[0].value = None
-		return (min(scoresList) if abs(min(scoresList))>abs(max(scoresList)) else max(scoresList))
+		if scoresList:
+			return (min(scoresList) if abs(min(scoresList))>abs(max(scoresList)) else max(scoresList))
+		return 0
 
 	def computerWins(self,block) :
 		flag = False
