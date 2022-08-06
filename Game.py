@@ -39,7 +39,7 @@ class Block() :
 class GUI() :
 	def __init__(self,windowName) :
 		self.windowName	= windowName
-		self.width,self.height = 400,400
+		self.width,self.height = 500,500
 		self.menuHeight = 100
 		self.image	= np.zeros((self.height+self.menuHeight,self.width,3),np.uint8)
 		self.turn	= 1
